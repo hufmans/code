@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>屏幕共享</title>
+</head>
+<body>
+    <video id="localVideo" autoplay></video>
+    <script>
+        if (navigator && navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia) {
+            navigator.mediaDevices.getDisplayMedia({video: true}).then((mediastream) => {
+                let videoElement = document.getElementById("localVideo");
+                videoElement.srcObject = mediastream;
+                videoElement.play();
+            }).catch((err) => {
+                console.error("获取屏幕共享失败:", err);
+            });
+        } else {
+            console.error("浏览器不支持屏幕共享。");
+        }
+    </script>
+</body>
+</html>
